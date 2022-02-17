@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plant_name: MyString
+  is_indoors: false
+  soil_water_deficit: 1.5
+  rooting_depth: 1.5
+  minimum_allowable_depletion: MyString
+
+two:
+  plant_name: MyString
+  is_indoors: false
+  soil_water_deficit: 1.5
+  rooting_depth: 1.5
+  minimum_allowable_depletion: MyString

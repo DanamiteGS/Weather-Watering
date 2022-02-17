@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  city: MyString
+  evapotranspiration: 1.5
+  precipitation: 1.5
+
+two:
+  city: MyString
+  evapotranspiration: 1.5
+  precipitation: 1.5
