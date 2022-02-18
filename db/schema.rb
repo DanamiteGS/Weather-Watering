@@ -13,8 +13,8 @@
 ActiveRecord::Schema[7.0].define(version: 2022_02_17_175835) do
   create_table "locations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "city", null: false
-    t.float "evapotranspiration", null: false
-    t.float "precipitation", null: false
+    t.float "evapotranspiration"
+    t.float "precipitation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_17_175835) do
     t.bigint "user_id"
     t.bigint "plant_water_need_id"
     t.string "plant_name", null: false
-    t.boolean "is_indoors", null: false
+    t.boolean "is_indoors"
     t.float "soil_water_deficit", null: false
     t.float "rooting_depth", null: false
     t.string "minimum_allowable_depletion", null: false
