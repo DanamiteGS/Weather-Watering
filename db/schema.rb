@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_02_17_175835) do
-  create_table "location_water_contents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "locations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "city", null: false
     t.float "evapotranspiration", null: false
     t.float "precipitation", null: false
@@ -19,13 +19,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_17_175835) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "plant_water_need_factors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "plant_water_needs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.float "daily_water_need_factor", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "plants", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "plant_water_need_id"
     t.string "plant_name", null: false
     t.boolean "is_indoors", null: false
     t.float "soil_water_deficit", null: false
@@ -33,13 +35,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_17_175835) do
     t.string "minimum_allowable_depletion", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["plant_water_need_id"], name: "index_plants_on_plant_water_need_id"
+    t.index ["user_id"], name: "index_plants_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "location_id"
     t.string "email", null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_users_on_location_id"
   end
 
+  add_foreign_key "plants", "plant_water_needs"
+  add_foreign_key "plants", "users"
+  add_foreign_key "users", "locations"
 end
