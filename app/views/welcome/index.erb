@@ -1,1 +1,13 @@
 <h1>Weather Watering</h1>
+<div>
+  <% if Current.user %>
+    Logged in as: <%= Current.user.email %>
+    <%= button_to "Logout", logout_path, method: :delete %>
+  <% else %>
+    Don't be shy now, you can join us 00
+    <br>
+    <%= link_to "Login", login_path %>
+    <br>
+    <%= link_to "Register", register_path%>
+  <% end %>
+</div>
