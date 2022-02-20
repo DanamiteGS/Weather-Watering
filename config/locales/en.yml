@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+
+en:
+  password_reset_mailer:
+    reset:
+      subject: "Password reset request for Weather Watering"

@@ -1,0 +1,7 @@
+<h1>Hey,</h1>
+
+<p>Your Weather Watering password can be reset by clicking the button below. 
+The link will expire automatically in 15 minutes. 
+If you did not request a new password, please ignore this email.</p>
+
+<%= link_to "Reset Password", password_reset_edit_url(token: @token) %>

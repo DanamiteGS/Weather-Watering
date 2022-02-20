@@ -1,5 +1,5 @@
-<h1>Register</h1>
-<%= form_with model: @user, url: register_path do |f|%>
+<h1>Change Password</h1>
+<%= form_with model: Current.user, url: edit_password_path do |f|%>
   <% if f.object.errors.any? %>
     <div>
       <% f.object.errors.full_messages.each do |message|%>
@@ -7,10 +7,6 @@
       <% end %>
     </div>
   <% end %>
-  <div>
-    <%= f.label :email%>
-    <%= f.email_field :email%>
-  </div>
   <div>
     <%= f.label :password%>
     <%= f.password_field :password%>
@@ -20,6 +16,6 @@
     <%= f.password_field :password_confirmation%>
   </div>
   <div>
-    <%= f.submit "Get Started!"%>
+    <%= f.submit "Done!"%>
   </div>
 <% end %>
