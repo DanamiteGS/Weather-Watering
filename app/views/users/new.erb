@@ -9,7 +9,13 @@
   <% end %>
   <div>
     <%= f.label :email%>
-    <%= f.email_field :email%>
+    <%= f.text_field :email%>
+  </div>
+  <div>
+    <%= f.fields_for :location do |l|%>
+      <%= l.label :city %>
+      <%= l.text_field :city %>
+    <% end %>
   </div>
   <div>
     <%= f.label :password%>
