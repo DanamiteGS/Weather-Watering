@@ -1,0 +1,22 @@
+<div>
+  Name: <%= plant.plant_name %>
+</div>
+<div>
+  <% if plant.is_indoors == true %>
+    Indoor plant
+  <% else %>
+    Outdoor plant
+  <% end %>
+</div>
+<div>
+  Pot size: <%= plant.rooting_depth %>
+</div>
+<div>
+  Plant water need: <%= plant.plant_water_need_id %>
+</div>
+<div>
+  <%= link_to "Edit Plant", edit_plant_path(plant) %>
+</div>
+<div>
+  <%= button_to "Delete", plant, method: :delete, data: [ confirm: "Are you sure?"] %>
+</div>

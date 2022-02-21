@@ -2,8 +2,20 @@ class Plant < ApplicationRecord
   belongs_to :user
   belongs_to :plant_water_need
 
-  validates_presence_of :plant_name
-  validates_numericality_of :rooting_depth, :soil_water_deficit, :minimum_allowable_depletion
+  accepts_nested_attributes_for :plant_water_need
 
-  # validate :plant_name Must be unique among a users plants list
+  validates_presence_of :plant_name
+  validates_numericality_of :rooting_depth, :soil_water_deficit, :maximum_allowable_depletion
+
+  after_initialize do
+    self.soil_water_deficit ||= 0 # Amount of water that left the soil. Program will assume plant has been recently watered and has not lost any water yet
+    if !self.rooting_depth.nil?
+       self.maximum_allowable_depletion ||= (total_water_available / 2) # Usually 50% of total water available
+    end
+  end
+
+  def total_water_available
+    loams_available_water_holding_capacity = 1.5 # Amount of water that loam soil can retain
+    return (loams_available_water_holding_capacity * self.rooting_depth)
+  end
 end

@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_17_175835) do
     t.boolean "is_indoors"
     t.float "soil_water_deficit", null: false
     t.float "rooting_depth", null: false
-    t.string "minimum_allowable_depletion", null: false
+    t.string "maximum_allowable_depletion", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plant_water_need_id"], name: "index_plants_on_plant_water_need_id"

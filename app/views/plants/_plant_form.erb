@@ -1,0 +1,23 @@
+<%= form_with model: plant do |f|%>
+  <%= render "shared_partials/form_errors", f: f %>
+  <div>
+    <%= f.label :plant_name %>
+    <%= f.text_field :plant_name%>
+  </div>
+  <div>
+    <%= f.label :is_indoors %>
+    <%= f.text_field :is_indoors%>
+  </div>
+  <div>
+    <%= f.label :rooting_depth %>
+    <%= f.text_field :rooting_depth%>
+  </div>
+  <div>
+    <%= f.submit "Save!"%>
+  </div>
+  <div>
+    <% if f.object.persisted? %>
+      <%= link_to "Delete", f.object, method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+<% end %>

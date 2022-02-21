@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  before_action :require_user_logged_in!, only: [:show, :edit, :update, :destroy]
+  
   def new
     @user = User.new #'@'veriable - instance variable
     @user.build_location # @user.location.new
@@ -7,7 +8,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    #@user.location_id = 1 # for testing
     @user.location = Location.where(city: @user.location.city).first_or_create
 
     if @user.save
@@ -17,6 +17,22 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def edit
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to plants_path, notice: "Successfully updated user!"
+    else
+      render :edit
+    end
+  end
+
+  #def destroy
+  #  @user.destroy # or delete?
+  #  redirect_to plants_path, notice: "Successfully removed @#{@plant.plant_name} plant"
+  #end
 
   private
 

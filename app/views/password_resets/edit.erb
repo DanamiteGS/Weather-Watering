@@ -1,12 +1,6 @@
 <h1>Change Your Password</h1>
 <%= form_with model: @user, url: password_reset_edit_path(token: params[:token]) do |f|%>
-  <% if f.object.errors.any? %>
-    <div>
-      <% f.object.errors.full_messages.each do |message|%>
-        <div><%= message%></div>
-      <% end %>
-    </div>
-  <% end %>
+  <%= render "shared_partials/form_errors", f: f %>
   <div>
     <%= f.label :password%>
     <%= f.password_field :password%>
