@@ -92,6 +92,7 @@ GEM
     digest (3.1.0)
     digest (3.1.0-java)
     erubi (1.10.0)
+    evapotranspiration (0.1.6)
     ffi (1.15.5)
     ffi (1.15.5-java)
     ffi (1.15.5-x64-mingw-ucrt)
@@ -252,6 +253,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  evapotranspiration
   figaro
   importmap-rails
   jbuilder

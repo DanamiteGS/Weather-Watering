@@ -30,6 +30,11 @@ gem "jbuilder"
 # Hiding your credentials from GitHub [https://github.com/laserlemon/figaro]
 gem "figaro"
 
+# Library for calculating reference crop evapotranspiration (ETo),
+# The library provides numerous methods for estimating missing meteorological data.
+# [https://github.com/brycejohnston/evapotranspiration]
+gem 'evapotranspiration'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
