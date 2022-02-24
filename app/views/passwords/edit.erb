@@ -1,6 +1,6 @@
 <h1>Change Password</h1>
 <%= form_with model: Current.user, url: edit_password_path do |f|%>
-  <%= render "shared_partials/form_errors", form: f %>
+  <%= render "shared_partials/form_errors", f: f %>
   <div>
     <%= f.label :password%>
     <%= f.password_field :password%>

@@ -12,7 +12,9 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_02_17_175835) do
   create_table "locations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "city", null: false
+    t.string "address", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
     t.float "evapotranspiration"
     t.float "precipitation"
     t.datetime "created_at", null: false

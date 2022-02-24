@@ -3,12 +3,12 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new #'@'veriable - instance variable
-    @user.build_location # @user.location.new
+    @user.build_location
   end
 
   def create
     @user = User.new(user_params)
-    @user.location = Location.where(city: @user.location.city).first_or_create
+    @user.location = Location.where(address: @user.location.address).first_or_create(:latitude => @user.location.latitude, :longitude => @user.location.longitude)
 
     if @user.save
       session[:user_id] = @user.id
@@ -37,6 +37,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, location_attributes: [:city])
+    params.require(:user).permit(:email, :password, :password_confirmation, location_attributes: [:address, :latitude, :longitude])
   end
 end

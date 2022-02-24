@@ -1,17 +1,18 @@
 <h1>Register</h1>
-<p data-controller="address-autocomplete"></p>
 <%= form_with model: @user, url: register_path do |f|%>
   <%= render "shared_partials/form_errors", f: f %>
   <div>
     <%= f.label :email%>
     <%= f.text_field :email%>
   </div>
-  <div>
-    <%= f.fields_for :location do |l|%>
-      <%= l.label :city %>
-      <%= l.text_field :city %>
-    <% end %>
-  </div>
+  <%= f.fields_for :location do |l|%>
+    <div data-controller="address-autocomplete", class="autocomplete-container", id="autocomplete-container">
+      <%= l.label :address %>
+      <%= l.search_field :address, data: {target: "address-autocomplete.address", action: "keydown->address-autocomplete#keydown"} %>
+      <%= l.hidden_field :latitude, data: {target: "address-autocomplete.latitude"} %>
+      <%= l.hidden_field :longitude, data: {target: "address-autocomplete.longitude"} %>
+    </div>
+  <% end %>
   <div>
     <%= f.label :password%>
     <%= f.password_field :password%>
@@ -24,4 +25,3 @@
     <%= f.submit "Get Started!"%>
   </div>
 <% end %>
-<div class="autocomplete-container" id="autocomplete-container"></div>
