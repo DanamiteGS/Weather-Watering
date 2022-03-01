@@ -8,7 +8,7 @@ class CreatePlants < ActiveRecord::Migration[7.0]
       t.boolean :is_indoors
       t.float :soil_water_deficit, null: false
       t.float :rooting_depth, null: false
-      t.string :maximum_allowable_depletion, null: false
+      t.float :maximum_allowable_depletion, null: false
 
       t.timestamps
     end
