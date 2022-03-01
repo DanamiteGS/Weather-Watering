@@ -35,6 +35,30 @@ gem "figaro"
 # [https://github.com/brycejohnston/evapotranspiration]
 gem 'evapotranspiration'
 
+# Simple, efficient background processing for Ruby. [https://github.com/mperham/sidekiq]
+gem 'sidekiq'
+
+# An extension to Sidekiq that pushes jobs in a scheduled way, mimicking cron utility. 
+# [https://github.com/moove-it/sidekiq-scheduler]
+gem 'sidekiq-scheduler'
+
+# Simple Sidekiq Batch Job implementation.
+# [https://github.com/breamware/sidekiq-batch]
+gem 'sidekiq-batch'
+
+# Faraday is an HTTP client library abstraction layer that provides a common interface over many adapters
+# [https://lostisland.github.io/faraday/]
+gem 'faraday'
+
+# A Faraday adapter for the Net::HTTP library [https://github.com/lostisland/faraday-net_http]
+gem 'faraday-net_http'
+
+gem 'json', '~> 2.6', '>= 2.6.1'
+
+# Pluck multiple columns/attributes and can return data as a hash.
+# [https://github.com/khiav223577/pluck_all]
+gem 'pluck_all'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
