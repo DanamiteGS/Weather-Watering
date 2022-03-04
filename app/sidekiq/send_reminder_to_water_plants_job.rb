@@ -1,6 +1,8 @@
 class SendReminderToWaterPlantsJob
   include Sidekiq::Job
 
+  sidekiq_options retry: false
+
   def perform(plant_id, user_id)
     plant_name = Plant.where(id: plant_id).pluck(:plant_name)
     owner_email = User.where(id: user_id).pluck(:email)

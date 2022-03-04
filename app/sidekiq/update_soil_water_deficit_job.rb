@@ -1,6 +1,8 @@
 class UpdateSoilWaterDeficitJob
   include Sidekiq::Job
 
+  sidekiq_options retry: false
+
   RESET_SOIL_WATER_DEFICIT = 0
 
   def perform(plant_id, evapotranspiration, precipitation)

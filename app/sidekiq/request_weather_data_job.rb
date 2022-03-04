@@ -1,6 +1,8 @@
 class RequestWeatherDataJob
   include Sidekiq::Job
 
+  sidekiq_options retry: false
+
   require "faraday"
   require "json"
 

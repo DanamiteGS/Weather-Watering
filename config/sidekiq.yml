@@ -1,0 +1,4 @@
+:schedule:
+  location_enqueuer_job:
+    every: '24 hours'
+    class: LocationEnqueuerJob

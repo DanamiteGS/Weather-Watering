@@ -1,7 +1,7 @@
+require 'sidekiq-scheduler'
+
 class LocationEnqueuerJob
   include Sidekiq::Job
-
-  sidekiq_options retry: false
 
   def perform
     batch = Sidekiq::Batch.new
