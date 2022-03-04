@@ -1,22 +1,27 @@
-<div>
-  Name: <%= plant.plant_name %>
-</div>
-<div>
-  <% if plant.is_indoors == true %>
-    Indoor plant
-  <% else %>
-    Outdoor plant
-  <% end %>
-</div>
-<div>
-  Pot size: <%= plant.rooting_depth %>
-</div>
-<div>
-  Plant water need: <%= plant.plant_water_need_id %>
-</div>
-<div>
-  <%= link_to "Edit Plant", edit_plant_path(plant) %>
-</div>
-<div>
-  <%= button_to "Delete", plant, method: :delete, data: [ confirm: "Are you sure?"] %>
+
+<div class="col-md-4" id="<%= dom_id plant %>">
+  <div class="card border-primary mb-3">
+    <div class="card-header"><strong><%= plant.plant_name %></strong></div>
+    <div class="card-body">
+      <div class="card-text">
+          <div>
+            <% if plant.is_indoors == true %>
+              Indoor plant
+            <% else %>
+              Outdoor plant
+            <% end %>
+          </div>
+          <div>Pot size: <%= plant.rooting_depth %></div>
+          <div>Plant water need: <%= plant.plant_water_need.daily_water_need_factor %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <%= button_to "Edit Plant", edit_plant_path(plant), method: :get, data: { turbo_frame: 'modal' }, :class => 'btn btn-block btn-primary mt-4' %>
+        </div>
+        <div class="col-md-6">
+          <%= button_to "Delete", plant, method: :delete, data: { confirm: "Are you sure?"}, data: { "turbo" => "false" }, :class => 'btn btn-block btn-primary mt-4' %>
+        </div>
+      </div>
+   </div>
+  </div>
 </div>

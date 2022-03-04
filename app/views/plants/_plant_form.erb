@@ -1,23 +1,39 @@
-<%= form_with model: plant do |f|%>
-  <%= render "shared_partials/form_errors", f: f %>
-  <div>
-    <%= f.label :plant_name %>
-    <%= f.text_field :plant_name%>
-  </div>
-  <div>
-    <%= f.label :is_indoors %>
-    <%= f.text_field :is_indoors%>
-  </div>
-  <div>
-    <%= f.label :rooting_depth %>
-    <%= f.text_field :rooting_depth%>
-  </div>
-  <div>
-    <%= f.submit "Save!"%>
-  </div>
-  <div>
-    <% if f.object.persisted? %>
-      <%= link_to "Delete", f.object, method: :delete, data: { confirm: "Are you sure?" } %>
-    <% end %>
+<%= form_with model: @plant do |f|%>
+
+  <div class="center-items">
+    <div class="form-container">
+
+      <%= render "shared_partials/form_errors", f: f %>
+
+      <fieldset>
+        <div class="form-group">
+          <div for="plant_name" class="form-label mt-4">Plant name</div>
+          <%= f.text_field :plant_name, :class => 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <div for="is_indoors" class="form-label mt-4">Is it an indoor or outdoor plant?</div>
+          <div class="form-check">
+            <label class="form-check-label"><%= f.radio_button :is_indoors, "true", :class => 'form-check-input' %>Indoors</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><%= f.radio_button :is_indoors, "false", :class => 'form-check-input' %>Outdoors</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div for="rooting_depth" class="form-label mt-4">Pot size</div>
+          <%= f.number_field :rooting_depth, :class => 'form-control' %>
+        </div>
+
+        <div class="d-grid gap-2 d-flex justify-content-center">
+          <%= f.submit "Save!", :class => 'btn btn-block btn-primary mt-5' %>
+          <% if f.object.persisted? %>
+            <%= link_to "Delete", f.object, method: :delete, data: { confirm: "Are you sure?" }, :class => 'btn btn-block btn-primary mt-5' %>
+          <% end %>
+        </div>
+
+      </fieldset>
+    </div>
   </div>
 <% end %>

@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "modal" do %> <!-- Used to match with the frame tag defined in the application layout. -->
+  <div data-controller="modal-form" data-action="keyup@document->modal-form#handleKeyup">
+    <!-- Clicking outside the modal will cause it to close -->
+    <div class="modal-background" data-action="click->modal-form#close"></div>
+    <div class="modal-backdrop">
+      <div class="modal-box p-4">
+        <button class="close-button btn btn-primary" data-action="modal-form#close">X</button>
+
+        <%= turbo_frame_tag "modal-body" do %>
+          <%= yield %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+

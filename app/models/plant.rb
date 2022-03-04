@@ -1,8 +1,10 @@
 class Plant < ApplicationRecord
   belongs_to :user
   belongs_to :plant_water_need
-
+  
   accepts_nested_attributes_for :plant_water_need
+
+  validates_associated :plant_water_need
 
   validates_presence_of :plant_name
   validates_numericality_of :rooting_depth, :soil_water_deficit, :maximum_allowable_depletion

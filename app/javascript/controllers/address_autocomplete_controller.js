@@ -134,6 +134,7 @@ export default class extends Controller {
           data.results.forEach((result, index) => {
             /* Create a DIV element for each element: */
             const itemElement = document.createElement("div");
+            itemElement.setAttribute("class", "dropdown-item text-muted");
             /* Set formatted address as item value */
             itemElement.innerHTML = result.formatted; // CHANGED
             autocompleteItemsElement.appendChild(itemElement);
