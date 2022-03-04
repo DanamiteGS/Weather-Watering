@@ -11,12 +11,12 @@
               Outdoor plant
             <% end %>
           </div>
-          <div>Pot size: <%= plant.rooting_depth %></div>
-          <div>Plant water need: <%= plant.plant_water_need.daily_water_need_factor %></div>
+          <div>Pot length: <%= plant.rooting_depth %> (cm)</div>
+          <div>Plant type: <%= plant.plant_water_need.plant_type %></div>
       </div>
       <div class="row">
         <div class="col-md-6">
-          <%= button_to "Edit Plant", edit_plant_path(plant), method: :get, data: { turbo_frame: 'modal' }, :class => 'btn btn-block btn-primary mt-4' %>
+          <%= button_to "Edit", edit_plant_path(plant), method: :get, data: { turbo_frame: 'modal' }, :class => 'btn btn-block btn-primary mt-4' %>
         </div>
         <div class="col-md-6">
           <%= button_to "Delete", plant, method: :delete, data: { confirm: "Are you sure?"}, data: { "turbo" => "false" }, :class => 'btn btn-block btn-primary mt-4' %>

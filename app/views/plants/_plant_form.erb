@@ -22,7 +22,19 @@
         </div>
 
         <div class="form-group">
-          <div for="rooting_depth" class="form-label mt-4">Pot size</div>
+          <div for="water-need" class="form-label mt-4">Plants water need</div>
+          <% @water_needs_options.each do |water_need| %>
+            <div class="form-check">
+              <label class="form-check-label">
+                <%= f.radio_button :plant_water_need_id, water_need.id, :checked => (@plant.plant_water_need_id == water_need.id), :class => 'form-check-input' %>
+                <%= water_need.plant_type %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <div for="rooting_depth" class="form-label mt-4">Pot length (cm)</div>
           <%= f.number_field :rooting_depth, :class => 'form-control' %>
         </div>
 

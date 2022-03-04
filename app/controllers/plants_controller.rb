@@ -2,7 +2,7 @@ class PlantsController < ApplicationController
 
   before_action :require_user_logged_in!
   before_action :set_plant, only: [:show, :edit, :update, :destroy]
-  #before_action :water_needs_options, only: [:new, :edit]
+  before_action :set_water_needs_options, only: [:new, :edit]
   before_action :ensure_frame_response, only: [:new, :edit]
 
   def index
@@ -19,8 +19,7 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Current.user.plants.new(plant_params)
-    @plant.plant_water_need_id = 1 # Temporary
- 
+
     respond_to do |format|
       if @plant.save
         format.turbo_stream do
@@ -57,7 +56,7 @@ class PlantsController < ApplicationController
   private
 
   def plant_params
-    params.require(:plant).permit(:plant_name, :is_indoors, :rooting_depth, plant_water_need_attributes: [:id])
+    params.require(:plant).permit(:plant_name, :is_indoors, :rooting_depth, :plant_water_need_id)
   end
 
   def set_plant
@@ -65,7 +64,7 @@ class PlantsController < ApplicationController
   end
 
   def set_water_needs_options
-    @water_needs_options = PlantWaterNeed.pluck_all(:id, :daily_water_need_factor)
+    @water_needs_options = PlantWaterNeed.all
   end
 
   def ensure_frame_response
