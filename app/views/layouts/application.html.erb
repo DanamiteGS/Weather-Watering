@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RubyTest</title>
+    <title>Weather Watering 🌤</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,6 +14,12 @@
   </head>
 
   <body>
-    <%= yield %>
+  <%= render "shared_partials/navbar" %>
+
+  <%= turbo_frame_tag "modal" %>
+
+  <div class="content mb-5"><%= yield %></div>
+
+  <%= render "shared_partials/footer" %>
   </body>
 </html>

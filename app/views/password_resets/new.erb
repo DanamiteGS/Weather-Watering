@@ -1,10 +1,22 @@
-<h1>Reset Password</h1>
-<%= form_with url: password_reset_path do |f|%>
-  <div>
-    <%= f.label :email%>
-    <%= f.email_field :email%>
+<div class="center-items">
+  <div class="form-container">
+    
+    <h1 class="text-center mb-3">Reset Password🌳</h1>
+
+    <%= form_with url: password_reset_path do |f|%>
+      <fieldset>
+        <div class="form-group">
+          <div for="email" class="form-label mt-4">Email address</div>
+          <%= f.email_field :email, :class => 'form-control', :placeholder => 'Enter email'%>
+        </div>
+
+        <small id="email" class="form-text text-muted">Instructions to change your password will be sent to your email.</small>
+        
+        <div class="d-grid gap-2 d-flex justify-content-center">
+          <%= f.submit "Send email!", :class => 'btn btn-block btn-primary mt-5', data: {toggle: "modal", target: "instructionsSentModal"} %>
+        </div>
+      </fieldset>
+    <% end %>
+
   </div>
-  <div>
-    <%= f.submit "Send email"%>
-  </div>
-<% end %>
+</div>

@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in!, only: [:show, :edit, :update, :destroy]
   
+  before_action :require_user_logged_out, only: [:new, :create]
+  before_action :require_user_logged_in!, only: [:show, :edit, :update, :destroy]
+
   def new
-    @user = User.new #'@'veriable - instance variable
+    @user = User.new
     @user.build_location
   end
 
@@ -18,21 +20,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @user.update(user_params)
-      redirect_to plants_path, notice: "Successfully updated user!"
-    else
-      render :edit
-    end
-  end
-
-  #def destroy
-  #  @user.destroy # or delete?
-  #  redirect_to plants_path, notice: "Successfully removed @#{@plant.plant_name} plant"
-  #end
+  # TODO: Alow user to edit their profile
 
   private
 

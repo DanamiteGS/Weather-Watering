@@ -1,27 +1,48 @@
-<h1>Register</h1>
-<%= form_with model: @user, url: register_path do |f|%>
-  <%= render "shared_partials/form_errors", f: f %>
-  <div>
-    <%= f.label :email%>
-    <%= f.text_field :email%>
-  </div>
-  <%= f.fields_for :location do |l|%>
-    <div data-controller="address-autocomplete", class="autocomplete-container", id="autocomplete-container">
-      <%= l.label :address %>
-      <%= l.search_field :address, data: {target: "address-autocomplete.address", action: "keydown->address-autocomplete#keydown"} %>
-      <%= l.hidden_field :latitude, data: {target: "address-autocomplete.latitude"} %>
-      <%= l.hidden_field :longitude, data: {target: "address-autocomplete.longitude"} %>
+<div class="center-items">
+  <div class="form-container">
+
+    <h1 class="text-center mb-3">Register🌳</h1>
+
+    <%= form_with model: @user, url: register_path, data: { "turbo" => "false" } do |f|%>    
+      <%= render "shared_partials/form_errors", f: f %>
+
+      <fieldset>
+        <div class="form-group">
+          <div for="email" class="form-label mt-4">Email address</div>
+          <%= f.email_field :email, :class => 'form-control', :placeholder => 'Enter email'%>
+        </div>
+
+        <div class="form-group">
+          <%= f.fields_for :location do |l|%>
+            <div for="address" class="form-label mt-4">Location address</div>
+            <div data-controller="address-autocomplete", class="autocomplete-container", id="autocomplete-container">
+              <%= l.search_field :address, :class => 'form-control', :placeholder => 'Enter your address', 
+                  data: {target: "address-autocomplete.address", action: "keydown->address-autocomplete#keydown"} %>
+              <%= l.hidden_field :latitude, data: {target: "address-autocomplete.latitude"} %>
+              <%= l.hidden_field :longitude, data: {target: "address-autocomplete.longitude"} %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label mt-4">Password</label>
+          <%= f.password_field :password, :class => 'form-control', :placeholder => 'Enter password'%>
+        </div>
+
+        <div class="form-group">
+          <label for="password-confirmation" class="form-label mt-4">Password Confirmation</label>
+          <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Repeat password' %>
+        </div>
+
+        <div class="d-grid gap-2 d-flex justify-content-center">
+          <%= f.submit "Get Started!", :class => 'btn btn-block btn-primary mt-5' %>
+        </div>
+      </fieldset>
+    <% end %>
+
+    <div class = "text-center mt-5">
+      <p><strong>Already a member?</strong></p>
+      <strong><%= link_to "Login!", login_path %></strong>
     </div>
-  <% end %>
-  <div>
-    <%= f.label :password%>
-    <%= f.password_field :password%>
   </div>
-  <div>
-    <%= f.label :password_confirmation%>
-    <%= f.password_field :password_confirmation%>
-  </div>
-  <div>
-    <%= f.submit "Get Started!"%>
-  </div>
-<% end %>
+</div>

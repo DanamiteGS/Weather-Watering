@@ -1,7 +1,11 @@
-<h1>Hey,</h1>
+<body class="center-items">
+  <div class="form-container">
+    <h1 class="text-center mb-3">Hey,</h1>
 
-<p>Your Weather Watering password can be reset by clicking the button below. 
-The link will expire automatically in 15 minutes. 
-If you did not request a new password, please ignore this email.</p>
+      <p>Your Weather Watering password can be reset by clicking the button below. 
+      The link will expire automatically in 15 minutes. 
+      If you did not request a new password, please ignore this email.</p>
 
-<%= link_to "Reset Password", password_reset_edit_url(token: @token) %>
+      <%= link_to "Reset Password", password_reset_edit_url(token: @token), :class => 'btn btn-block btn-primary mt-5' %>
+  </div>
+</body>
