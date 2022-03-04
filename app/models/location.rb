@@ -22,8 +22,7 @@ class Location < ApplicationRecord
   #   Can be estimated using et_rad
   # @return [Float] Reference evapotranspiration over grass (ETo) (mm day-1)
 
-  def est_daily_evapotranspiration(tmin, tmax)
-    tmean = Evapotranspiration::FAO.daily_mean_t(tmin, tmax)
+  def est_daily_evapotranspiration(tmin, tmax, tmean)
     et_rad = est_daily_et_rad
 
     return Evapotranspiration::FAO.hargreaves(tmin, tmax, tmean, et_rad)

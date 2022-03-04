@@ -9,10 +9,10 @@ class Plant < ApplicationRecord
   validates_presence_of :plant_name
   validates_numericality_of :rooting_depth, :soil_water_deficit, :maximum_allowable_depletion
 
-  after_initialize do
+  before_save do
     self.soil_water_deficit ||= 0 # Amount of water that left the soil. Program will assume plant has been recently watered and has not lost any water yet
-    if !self.rooting_depth.nil?
-      self.maximum_allowable_depletion ||= (total_water_available / 2) # Usually 50% of total water available
+    if self.rooting_depth.present?
+      self.maximum_allowable_depletion = (total_water_available / 2) # Usually 50% of total water available
     end
   end
 

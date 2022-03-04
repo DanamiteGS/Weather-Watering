@@ -1,25 +1,35 @@
 class RequestWeatherDataJob
   include Sidekiq::Job
 
+  require "faraday"
+  require "json"
+
+  BASE_URL = "https://api.openweathermap.org/data/2.5/"
+  WEATHER_API_KEY = ENV['WEATHER_API_KEY']
+
   def perform(location_id)
     location = Location.find(location_id)
 
-    location.evapotranspiration = location.est_daily_evapotranspiration(24, 29) # Temporary
-    location.precipitation = 0.4
+    lat = location.latitude
+    lon = location.longitude
 
-    # Add specific location latitude and logitude to URL + API KEY
+    request = ""
+    request << BASE_URL << "weather?lat=#{lat}&lon=#{lon}&units=metric&appid=" << WEATHER_API_KEY
 
-    # https://flexiple.com/rails-parse-json/
+    response = Faraday.get(request)
 
-    # response = conn.get(url)
-    
-    # if response.success?
-      # parsed_response = JSON.pase(response)
+    if response.success?
+      weather_json = JSON.parse(response.body)
 
-      # location.evapotranspiration = location.est_daily_evapotranspiration(tmin, tmax)
-      # location.precipitation = # precipitation form API call
-      
+      tmin = weather_json["main"]["temp_min"]
+      tmax = weather_json["main"]["temp_max"]
+      tmean = weather_json["main"]["temp"]
+      precipitation = weather_json["rain"].present? ? weather_json["rain"]["1h"] : 0
+
+      location.evapotranspiration = location.est_daily_evapotranspiration(tmin, tmax, tmean)
+      location.precipitation = precipitation
+
       location.save
-    # end
+    end
   end
 end
