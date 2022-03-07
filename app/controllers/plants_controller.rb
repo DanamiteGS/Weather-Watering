@@ -1,17 +1,9 @@
 class PlantsController < ApplicationController
 
   before_action :require_user_logged_in!
-  before_action :set_plant, only: [:show, :edit, :update, :destroy]
-  before_action :set_water_needs_options, only: [:new, :edit]
+  before_action :set_plant, only: [:edit, :update, :destroy]
+  before_action :set_water_needs_options, only: [:new, :edit, :create, :update]
   before_action :ensure_frame_response, only: [:new, :edit]
-
-  def index
-    @plants = Current.user.plants
-
-    @plants.each do |plant|
-      plant.plant_water_need = plant.plant_water_need # How could this be better?
-    end
-  end
 
   def new
     @plant = Plant.new
@@ -39,8 +31,8 @@ class PlantsController < ApplicationController
     respond_to do |format|
       if @plant.update(plant_params)
         format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(@plant, partial: "plants/plant", locals: { plant: @plant })
-        end
+          render turbo_stream: turbo_stream.replace(@plant, partial: "plants/plant", locals: { plant: @plant })
+      end
         format.html { redirect_to plant_url(@plant), notice: "Plant was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,14 +41,17 @@ class PlantsController < ApplicationController
   end
 
   def destroy
-    @plant.destroy # or delete?
-    redirect_to plants_path, notice: "Successfully removed @#{@plant.plant_name} plant"
+    respond_to do |format|
+      if @plant.destroy
+        format.html { redirect_to plants_path, notice: "Successfully deleted plant" }
+      end
+    end
   end
 
   private
 
   def plant_params
-    params.require(:plant).permit(:plant_name, :is_indoors, :rooting_depth, :plant_water_need_id)
+    params.require(:plant).permit(:plant_name, :is_indoors, :soil_depth, :plant_water_need_id)
   end
 
   def set_plant
@@ -64,7 +59,7 @@ class PlantsController < ApplicationController
   end
 
   def set_water_needs_options
-    @water_needs_options = PlantWaterNeed.all
+    @water_needs_options ||= PlantWaterNeed.all
   end
 
   def ensure_frame_response

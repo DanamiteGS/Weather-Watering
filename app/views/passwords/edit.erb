@@ -1,27 +1,7 @@
-<div class="center-items">
-  <div class="form-container">
-    
-    <h1 class="text-center mb-3">Change Password🌳</h1>
+<%= render "shared_partials/app_fragments/modal" do %>
 
-    <%= form_with model: Current.user, url: edit_password_path, data: { "turbo" => "false" } do |f|%>
-      <%= render "shared_partials/form_errors", f: f %>
-      
-      <fieldset>
-        <div class="form-group">
-          <label for="password" class="form-label mt-4">New password</label>
-          <%= f.password_field :password, :class => 'form-control', :placeholder => 'Enter new password'%>
-        </div>
+<h1 class="text-center mb-4">Change Password🌳</h1>
+  
+<%= render "passwords/password_form" %>
 
-        <div class="form-group">
-          <label for="password-confirmation" class="form-label mt-4">New password Confirmation</label>
-          <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Repeat new password' %>
-        </div>
-        
-        <div class="d-grid gap-2 d-flex justify-content-center">
-          <%= f.submit "Done!", :class => 'btn btn-block btn-primary mt-5' %>
-        </div>
-      </fieldset>
-    <% end %>
-
-  </div>
-</div>
+<% end %>

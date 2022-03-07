@@ -1,9 +1,8 @@
-
-<div class="col-md-4" id="<%= dom_id plant %>">
+<div class="col-lg-3 col-md-4 col-sm-6 col-xsm-12" id="<%= dom_id plant %>">
   <div class="card border-primary mb-3">
-    <div class="card-header"><strong><%= plant.plant_name %></strong></div>
+    <div class="card-header h5 text-center py-3"><%= plant.plant_name %></div>
     <div class="card-body">
-      <div class="card-text">
+      <div class="card-text text-center">
           <div>
             <% if plant.is_indoors == true %>
               Indoor plant
@@ -11,17 +10,12 @@
               Outdoor plant
             <% end %>
           </div>
-          <div>Pot length: <%= plant.rooting_depth %> (cm)</div>
+          <div>Pot length: <%= plant.soil_depth %> (cm)</div>
           <div>Plant type: <%= plant.plant_water_need.plant_type %></div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
           <%= button_to "Edit", edit_plant_path(plant), method: :get, data: { turbo_frame: 'modal' }, :class => 'btn btn-block btn-primary mt-4' %>
-        </div>
-        <div class="col-md-6">
-          <%= button_to "Delete", plant, method: :delete, data: { confirm: "Are you sure?"}, data: { "turbo" => "false" }, :class => 'btn btn-block btn-primary mt-4' %>
-        </div>
-      </div>
+
+          <%= button_to "Delete", plant, method: :delete, data: { confirm: "Are you sure?"}, :class => 'btn btn-block btn-danger mt-2' %>
    </div>
   </div>
 </div>

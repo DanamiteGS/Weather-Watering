@@ -1,8 +1,7 @@
-<%= render "shared_partials/modal" do %>
+<%= render "shared_partials/app_fragments/modal" do %>
 
-  <h1>Edit plant🌳</h1>
+  <h1 class="mb-3">Edit plant🌳</h1>
   
   <%= render "plants/plant_form", plant: @plant %>
-  <%= button_tag "Close", data: { action: "modal-form#close" }, type: "button", class: "btn btn-block btn-primary" %>
 
 <% end %>

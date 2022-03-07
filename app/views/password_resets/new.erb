@@ -3,7 +3,10 @@
     
     <h1 class="text-center mb-3">Reset Password🌳</h1>
 
-    <%= form_with url: password_reset_path do |f|%>
+    <%= form_with url: password_reset_path, data: { "turbo" => "false" } do |f|%>
+
+      <%= render "shared_partials/app_messages/error" %>
+
       <fieldset>
         <div class="form-group">
           <div for="email" class="form-label mt-4">Email address</div>
@@ -16,6 +19,7 @@
           <%= f.submit "Send email!", :class => 'btn btn-block btn-primary mt-5', data: {toggle: "modal", target: "instructionsSentModal"} %>
         </div>
       </fieldset>
+
     <% end %>
 
   </div>

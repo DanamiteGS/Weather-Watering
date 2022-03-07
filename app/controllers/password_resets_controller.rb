@@ -6,12 +6,18 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:email])
+    if params[:email].present?
+      @user = User.find_by(email: params[:email])
 
-    if @user.present?
-      PasswordResetMailer.with(user: @user).reset.deliver_later
+      if @user.present?
+        PasswordResetMailer.with(user: @user).reset.deliver_later
+      end
+
+      redirect_to password_reset_path, notice: ("We have sent instructions to change your password to #{params[:email]} Please check both your inbox and spam folder")
+    else
+      flash[:alert] = "Please enter your email address!"
+      render :new
     end
-    redirect_to password_reset_path, notice: ("We have sent instructions to change your password to " + :email.to_s + ". Please check both your inbox and spam folder")
   end
 
   def edit
