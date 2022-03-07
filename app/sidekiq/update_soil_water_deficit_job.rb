@@ -8,7 +8,7 @@ class UpdateSoilWaterDeficitJob
   def perform(plant_id, evapotranspiration, precipitation)
 
     plant = Plant.find(plant_id)
-    soil_water_deficit = plant.calculate_soil_water_deficit(evapotranspiration, precipitation)
+    soil_water_deficit = plant.water_deficit(evapotranspiration, precipitation)
 
     if soil_water_deficit > plant.maximum_allowable_depletion
       SendReminderToWaterPlantsJob.perform_async(plant.id, plant.user_id) # Sends an email to the owner of the plant that needs watering

@@ -7,24 +7,26 @@ class Plant < ApplicationRecord
   validates_associated :plant_water_need
 
   validates_presence_of :plant_name
-  validates_numericality_of :rooting_depth, :soil_water_deficit, :maximum_allowable_depletion
+  validates_numericality_of :soil_depth, :soil_water_deficit, :maximum_allowable_depletion
 
   before_validation do
     self.soil_water_deficit ||= 0 # Amount of water that left the soil. Program will assume plant has been recently watered and has not lost any water yet
-    if self.rooting_depth.present?
-      self.maximum_allowable_depletion = (total_water_available / 2) # Usually 50% of total water available
+    if self.soil_depth.present?
+      self.maximum_allowable_depletion = (available_water * 0.5) # Usually 50% of total water available
     end
   end
 
-  def total_water_available
-    loams_available_water_holding_capacity = 1.5 # Amount of water that loam soil can retain
-    return (loams_available_water_holding_capacity * self.rooting_depth)
+  def available_water
+    loam_water_holding_capacity = 38.1 # millimeters of water per meter of soil
+    return loam_water_holding_capacity * (self.soil_depth / 100)
   end
 
-  def calculate_soil_water_deficit(et, precipitation)
-    daily_water_need_factor = self.plant_water_need.daily_water_need_factor
+  def water_deficit(evapotranspiration, precipitation)
     precipitation = 0 if self.is_indoors
+    return self.soil_water_deficit + daily_water_need(evapotranspiration) - precipitation
+  end
 
-    return self.soil_water_deficit + et + daily_water_need_factor - precipitation
+  def daily_water_need(evapotranspiration)
+    return self.plant_water_need.daily_water_need_factor * evapotranspiration # returns the amount of water lost
   end
 end

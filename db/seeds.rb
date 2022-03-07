@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 PlantWaterNeed.create([ # Set default values for each plant's water need group
-  { daily_water_need_factor: "0.143", plant_type: "Water loving" },
-  { daily_water_need_factor: "0.086", plant_type: "Drought Tolerant" },
-  { daily_water_need_factor: "0.043", plant_type: "Succulent" }
+  { daily_water_need_factor: "1", plant_type: "Water loving" },
+  { daily_water_need_factor: "0.6", plant_type: "Drought Tolerant" },
+  { daily_water_need_factor: "0.3", plant_type: "Succulent" }
 ])
