@@ -1,0 +1,33 @@
+<%= render "shared_partials/app_fragments/modal" do %>
+
+  <%= form_with model: @user, url: edit_address_path do |f|%>
+
+  <h1 class="text-center mb-4">Change Address🌳</h1>
+
+    <div class="center-items">
+      <div class="form-container">
+    
+        <%= render "shared_partials/app_messages/form_errors", f: f %>
+      
+        <fieldset>
+      
+          <div class="form-group">
+            <%= f.fields_for :location do |l|%>
+              <div for="address" class="form-label mt-4">Update Location address</div>
+              <div data-controller="address-autocomplete", class="autocomplete-container", id="autocomplete-container">
+                <%= l.search_field :address, :class => 'form-control', :placeholder => 'Enter your address', 
+                    data: {target: "address-autocomplete.address", action: "keydown->address-autocomplete#keydown"} %>
+                <%= l.hidden_field :latitude, data: {target: "address-autocomplete.latitude"} %>
+                <%= l.hidden_field :longitude, data: {target: "address-autocomplete.longitude"} %>
+              </div>
+            <% end %>
+          </div>
+        
+          <div class="d-grid gap-2 d-flex justify-content-center">
+            <%= f.submit "Done!", :class => 'btn btn-block btn-primary mt-5' %>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  <% end %>
+<% end %>

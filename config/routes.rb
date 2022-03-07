@@ -27,4 +27,14 @@ Rails.application.routes.draw do
   #get "my_plants/:id"
   #delete "my_plants/:id"
 
+  get "me", to: "users#show"
+
+  get "email", to:"users#edit_email", as: :edit_email
+  patch "email", to:"users#update_email"
+
+  get "address", to:"users#edit_address", as: :edit_address
+  patch "address", to:"users#update_address"
+
+  delete "delete", to:"users#destroy", as: :delete_user
+
 end

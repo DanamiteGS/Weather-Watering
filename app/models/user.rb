@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   belongs_to :location
-  has_many :plants
+  has_many :plants, dependent: :delete_all
   has_secure_password
 
   accepts_nested_attributes_for :location

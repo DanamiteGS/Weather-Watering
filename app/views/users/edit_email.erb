@@ -1,0 +1,27 @@
+<%= render "shared_partials/app_fragments/modal" do %>
+  <%= form_with model: @user, url: edit_email_path do |f|%>
+
+  <h1 class="text-center mb-4">Change Email🌳</h1>
+
+    <div class="center-items">
+      <div class="form-container">
+    
+        <%= render "shared_partials/app_messages/form_errors", f: f %>
+      
+        <fieldset>
+
+          <div class="form-group">
+            <div for="email" class="form-label mt-4">New Email address</div>
+            <%= f.email_field :email, :class => 'form-control', :placeholder => 'Enter email'%>
+          </div>
+        
+          <div class="d-grid gap-2 d-flex justify-content-center">
+            <%= f.submit "Done!", :class => 'btn btn-block btn-primary mt-5' %>
+          </div>
+
+        </fieldset>
+
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,22 @@
+<div class="row mb-5">
+    <div class="col-sm-6">
+        <h1>My plants</h1>
+    </div>
+    <div class="col-sm-6 d-flex justify-content-sm-end justify-content-start mt-sm-0 mt-3">
+        <%= button_to "Add Plant", new_plant_path, method: :get, data: { turbo_frame: 'modal' }, :class => "btn btn-info btn-sm" %>
+    </div>
+</div>
+
+<%= turbo_frame_tag "no_plants" do %>
+  <%= render "shared_partials/empty_section", message: "You have no plants yet ;-; \n To start, click on the 'Add Plant' button on the right!" %>
+<% end %>
+
+<div id="plants" class="row mb-5">
+    <%= render @plants %>
+</div>
+
+<hr class="text-primary"/>
+
+<div class="row mt-4">
+    <%= render "users/user", user: @user %>
+</div>

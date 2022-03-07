@@ -4,7 +4,7 @@
     <h1 class="text-center mb-3">Register🌳</h1>
 
     <%= form_with model: @user, url: register_path, data: { "turbo" => "false" } do |f|%>    
-      <%= render "shared_partials/form_errors", f: f %>
+      <%= render "shared_partials/app_messages/form_errors", f: f %>
 
       <fieldset>
         <div class="form-group">
