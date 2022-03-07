@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Weather Watering 🌤</a>
+    <a class="navbar-brand" href="/">Weather Watering 🌤</a>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,12 +8,13 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#web-demo">Web Demo</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#web-demo">Web Demo</a></li>
         <li class="nav-item"><a class="nav-link" href="https://github.com/DanaGS/Weather-Watering" target="_blank" >GitHub</a></li>
       </ul>
       <div class="d-flex">
         <% if Current.user %>
+          <%= link_to "My Account", me_path, :class => 'btn btn-info btn-sm navbar-button nav-item' %>
           <%= button_to "Logout", logout_path, method: :delete, :class => 'btn btn-info btn-sm navbar-button nav-item', data: { "turbo" => "false" } %>
         <% else %>
           <%= link_to "Login", login_path, :class => 'btn btn-info btn-sm navbar-button nav-item' %>
