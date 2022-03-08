@@ -25,7 +25,8 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to me_path, notice: "Successfully created account"
+      flash[:primary] = "Welcome new weather waterer!"
+      redirect_to me_path
     else
       render :new
     end
@@ -37,14 +38,16 @@ class UsersController < ApplicationController
   def edit_email
   end
 
-  def update_address #######################################
-    @user.location = Location.where(address: @user.location.address).first_or_create(:latitude => @user.location.latitude, :longitude => @user.location.longitude)
+  def update_address
+    location_attributes = address_params.dig(:location_attributes)
+    location = Location.where(address: location_attributes.dig(:address)).first_or_create(:latitude => location_attributes.dig(:latitude), :longitude => location_attributes.dig(:longitude))
+    
     respond_to do |format|
-      if @user.update(address_params)
+      if @user.update(location: location)
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(@user, partial: "users/user", locals: { user: @user })
         end
-        format.html { redirect_to me_path, notice: "Address updated!" }
+        format.html { redirect_to me_path }
       else
         format.html { render :edit_address, status: :unprocessable_entity }
       end
@@ -57,7 +60,7 @@ class UsersController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(@user, partial: "users/user", locals: { user: @user })
         end
-        format.html { redirect_to me_path, notice: "Email updated!" }
+        format.html { redirect_to me_path }
       else
         format.html { render :edit_email, status: :unprocessable_entity }
       end
@@ -66,16 +69,15 @@ class UsersController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-
     location = @user.location
-
     @user.destroy
 
     if location.users.empty?
       location.destroy
     end
     
-    redirect_to root_path, notice: "Successfully deleted account"
+    flash[:primary] = "Successfully deleted account"
+    redirect_to root_path
   end
 
   private

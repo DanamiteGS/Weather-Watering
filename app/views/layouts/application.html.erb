@@ -14,12 +14,14 @@
   </head>
 
   <body>
-  <%= render "shared_partials/navbar" %>
+  <%= render "shared_partials/app_fragments/navbar" %>
+
+  <div class="mb-4"><%= render "shared_partials/app_messages/flash" %></div>
 
   <%= turbo_frame_tag "modal" %>
 
   <div class="content mb-5"><%= yield %></div>
 
-  <%= render "shared_partials/footer" %>
+  <%= render "shared_partials/app_fragments/footer" %>
   </body>
 </html>

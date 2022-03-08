@@ -17,7 +17,7 @@ class PlantsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.prepend('plants', partial: 'plants/plant', locals: { plant: @plant })
         end
-        format.html { redirect_to plant_url(@plant), notice: "Plant was successfully added." }
+        format.html { redirect_to plant_url(@plant) }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -33,7 +33,7 @@ class PlantsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(@plant, partial: "plants/plant", locals: { plant: @plant })
       end
-        format.html { redirect_to plant_url(@plant), notice: "Plant was successfully updated." }
+        format.html { redirect_to plant_url(@plant) }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -43,7 +43,7 @@ class PlantsController < ApplicationController
   def destroy
     respond_to do |format|
       if @plant.destroy
-        format.html { redirect_to plants_path, notice: "Successfully deleted plant" }
+        format.html { redirect_to plants_path }
       end
     end
   end

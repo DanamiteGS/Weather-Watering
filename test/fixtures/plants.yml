@@ -4,12 +4,12 @@ one:
   plant_name: MyString
   is_indoors: false
   soil_water_deficit: 1.5
-  rooting_depth: 1.5
+  soil_depth: 1.5
   maximum_allowable_depletion: MyString
 
 two:
   plant_name: MyString
   is_indoors: false
   soil_water_deficit: 1.5
-  rooting_depth: 1.5
+  soil_depth: 1.5
   maximum_allowable_depletion: MyString

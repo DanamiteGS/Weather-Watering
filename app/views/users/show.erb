@@ -7,12 +7,12 @@
     </div>
 </div>
 
-<%= turbo_frame_tag "no_plants" do %>
-  <%= render "shared_partials/empty_section", message: "You have no plants yet ;-; \n To start, click on the 'Add Plant' button on the right!" %>
-<% end %>
-
-<div id="plants" class="row mb-5">
+<div id="plants" class="row mb-2">
     <%= render @plants %>
+</div>
+
+<div class="d-flex justify-content-center mb-sm-5 mb-4">
+  <%= image_tag("plant_pot.gif", :alt => "pixel plant pot", :class => "plant-pot-image") %>
 </div>
 
 <hr class="text-primary"/>

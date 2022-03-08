@@ -10,15 +10,18 @@ class SessionsController < ApplicationController
     
     if user.present? && user.authenticate(params[:password]) # authenticate method comes from users has_secure_password
       session[:user_id] = user.id
-      redirect_to me_path, notice: "Logged in successfully"
+
+      flash[:primary] = "Welcome back!"
+      redirect_to me_path
     else
-      flash[:alert] = "Invalid email or password"
+      flash.now[:danger] = "Invalid email or password"
       render :new
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: "Logged out"
+    flash[:primary] = "Logged out. Byebye!"
+    redirect_to root_path
   end
 end

@@ -106,3 +106,14 @@ nav {
   max-width: 50%;
   height: auto;
 }
+
+.plant-pot-image {
+  max-width: 45%;
+  height: auto;
+}
+
+.flash {
+  width: 100%;
+  max-width: 38rem;
+  text-align: center;
+}
