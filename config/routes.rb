@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   root "welcome#index"
 
+  post "/", to: "welcome#create", as: :demo
+
   get "register", to: "users#new"
   post "register", to: "users#create"
 

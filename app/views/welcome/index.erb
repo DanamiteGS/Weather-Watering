@@ -1,33 +1,107 @@
 <section id="about"">
   <div class="row">
-    <div class="col-md-4">
-      <div class="card text-white bg-info mb-3">
-        <div class="card-body">
-          <h4 class="card-title">Why?</h4>
-          <p class="card-text">Water your plants can be easy to forget, or sometimes, </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <div class="card text-white bg-info mb-3">
         <div class="card-body">
           <h4 class="card-title">What?</h4>
-          <p class="card-text">Weather watering sends reminders when it's time to water your plants based on the weather in your area.</p>
-          Push watering reminder
-          <p class="card-text">By calculating your plants daily water lost and the amount of water your plant requires, </p>
-          <p class="card-text">By calculating your plants daily water lost and the amount of water your plant requires!</p>
+          <p class="card-text">Unsure of when to water your plants? Weather watering reminds you when it's time to water your plants based on the weather in your area. </p>
+          <p class="card-text">Note that many factors conditions your plants water needs, some that Weather Watering may not be able to measure. Use the results as a guide/reminder! </p>
+        </div>
+      </div>
+      <div class="d-lg-flex justify-content-center d-none">
+        <%= image_tag("plant_pot.gif", :alt => "pixel plant pot", :class => "plant-pot-image") %>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-body">
+          <h4 class="card-title">Formulas</h4>
+          <h6 class="card-text"><strong>Estimating amount of water a plant can loose</strong></h6>
+          <p class="card-text">Maximum allowable water depletion(mm) = 50% of Available water </p>
+          <p class="card-text">Available water = Soil Water holding capacity(mm) * PLant pot height(m) </p>
+          <h6 class="card-text"><strong>Calculating plants daily water need</strong></h6>
+          <p class="card-text">Daily water need(mm) = Daily water need factor(varies per plant type) * Evapotranpiration(mm)</p>
+          <h6 class="card-text"><strong>Calculating daily water loss</strong></h6>
+          <p class="card-text">Soil water deficit(mm) = Previous days soil water deficit(mm) + Daily water need(mm) - precipitation(mm)</p>
+          <h6 class="card-text"><strong>When is it time to water?</strong></h6>
+          <p class="card-text">When accumulated soil water deficit exceeds a plants maximum allowable water depletion!</p>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <div class="card text-white bg-info mb-3">
         <div class="card-body">
           <h4 class="card-title">How?</h4>
-          <p class="card-text">By calculating your plants daily water lost and the amount of water your plant requires!</p>
-          <p class="card-text">Weather watering calculates how much water your plant has lost using current weather data.</p>
+          <p class="card-text">By estimating daily water loss and the amount of water your plant requires to stay healthy, weather watering predicts irrigation dates. </p>
+          <p class="card-text">The program utilizes current temperature, precipitation amount, evapotranspiration, water need factor per plant type, and amount of soil to produce such estimations.</p>
         </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <%= image_tag("plant_pot.gif", :alt => "pixel plant pot", :class => "plant-pot-image") %>
       </div>
     </div>
   </div>
 
 </section>
+
+<div id="web-demo" class="my-5">
+
+  <hr class="text-primary my-5"/>
+
+  <%= form_with model: @web_demo, url: demo_path, data: { "turbo" => "false" } do |f|%>
+
+    <h1 class="text-center">Web Demo🌳</h1>
+
+      <div class="center-items">
+        <div class="form-container">
+
+          <div class="mt-4"><%= render "shared_partials/app_messages/form_errors", f: f %></div>
+
+          <fieldset>
+
+            <div class="form-group">
+            <%= f.fields_for :location do |l|%>
+              <div for="address" class="form-label mt-4">Location address</div>
+              <div data-controller="address-autocomplete", class="autocomplete-container", id="autocomplete-container">
+                <%= l.search_field :address, :class => 'form-control', :placeholder => 'Enter your address', 
+                    data: {target: "address-autocomplete.address", action: "keydown->address-autocomplete#keydown"} %>
+                <%= l.hidden_field :latitude, data: {target: "address-autocomplete.latitude"} %>
+                <%= l.hidden_field :longitude, data: {target: "address-autocomplete.longitude"} %>
+              </div>
+            <% end %>
+          </div>
+
+          <%= f.fields_for :plant do |p|%>
+
+            <div class="form-group">
+              <div for="water-need" class="form-label mt-4">Plants water need</div>
+              <% @water_needs_options.each do |water_need| %>
+                <div class="form-check">
+                  <label class="form-check-label">
+                  <%= p.radio_button :plant_water_need_id, water_need.id, :class => 'form-check-input' %>
+                  <%= water_need.plant_type %>
+                  </label>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="form-group">
+              <div for="soil_depth" class="form-label mt-4">Pot height (cm)</div>
+              <%= p.number_field :soil_depth, :class => 'form-control' %>
+            </div>
+
+          <% end %>
+
+          <div class="d-grid gap-2 d-flex justify-content-center">
+            <%= f.submit "Calculate!", :class => 'btn btn-block btn-primary mt-5' %>
+          </div>
+
+        </fieldset>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="d-flex justify-content-center mt-sm-5 mt-4">
+  <%= image_tag("totoro.gif", :alt => "chu and chibi Totoro", :class => "totoro-image") %>
+</div>
