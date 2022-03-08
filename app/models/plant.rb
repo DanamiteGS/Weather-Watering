@@ -8,11 +8,12 @@ class Plant < ApplicationRecord
 
   validates_presence_of :plant_name
   validates_numericality_of :soil_depth, :soil_water_deficit, :maximum_allowable_depletion
+  validates :is_indoors, inclusion: { in: [true, false], message: "Please select an option for indoors or outdoors!" }
 
   before_validation do
     self.soil_water_deficit ||= 0 # Amount of water that left the soil. Program will assume plant has been recently watered and has not lost any water yet
     if self.soil_depth.present?
-      self.maximum_allowable_depletion = (available_water * 0.5) # Usually 50% of total water available
+      self.maximum_allowable_depletion = (available_water * 0.6) # Usually 60% of total water available
     end
   end
 
