@@ -16,7 +16,7 @@ $ git clone https://github.com/DanaGS/Weather-Watering
 $ ruby -v
 ```
 
-This project uses Ruby version 3.1.0 and Rails 7.0.2.2 version. If you you are using an older version you can see instructions on how to install the latest release on: https://www.ruby-lang.org/en/downloads/.
+This project uses Ruby version 3.1.0 and Rails version 7.0.2.2. If you you are using an older version, you can see instructions on how to install the latest release on: https://www.ruby-lang.org/en/downloads/.
 
 ### Install dependencies
 
@@ -31,6 +31,7 @@ This project uses Figaro to store environment variables: https://github.com/lase
 This app uses external apis to obtain geolocation and weather data. You will need to sign up and obtain an api key for each:
 
 https://openweathermap.org/
+
 https://www.geoapify.com/
 
 
@@ -46,11 +47,11 @@ $ rails db:create db:migrate db:seed
 $ rails s
 ```
 
-Run on localhost port:300
+Run on localhost port:3000
 
 ### Run Sidekiq and background tasks
 
-The app uses Sidekiq with Redis to run background jobs. These jobs include making scheduled calls to OpenWeatherMap API to update weather data, calculate daily evapotranspiration, update plants soil water deficit, and send email reminders.
+The app uses Sidekiq with Redis server to run background jobs. These jobs include making scheduled calls to OpenWeatherMap API to update weather data, calculate daily evapotranspiration, update plants soil water deficit, and send email reminders.
 
 To run Redis:
 
